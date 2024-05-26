@@ -1,15 +1,9 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import { PDFDocument } from "pdf-lib";
 import { readFile, writeFile } from "fs/promises";
 import { fileURLToPath } from "url";
-import path from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const pdfPath = path.join(__dirname, "server", "public", "lease_doc.pdf");
-const outputPath = path.join(__dirname, "server", "public", "output.pdf");
 
 const app = express();
 const port = 3001;
@@ -22,6 +16,14 @@ app.use(
     extended: true,
   })
 );
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const pdfPath = path.join(__dirname, "public", "lease_doc.pdf");
+const outputPath = path.join(__dirname,  "public", "output.pdf");
+console.log(__filename, __dirname)
+
+app.use('/pdf', express.static(__dirname + '/public'))
 
 app.get("/", (req, res) => {
   res.send("Easy Lease Says Hello World");
