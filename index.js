@@ -21,7 +21,6 @@ const __dirname = path.dirname(__filename);
 
 const pdfPath = path.join(__dirname, "public", "lease_doc.pdf");
 const outputPath = path.join(__dirname, "public", "output.pdf");
-console.log(__filename, __dirname);
 
 app.use("/pdf", express.static(__dirname + "/public"));
 
@@ -30,7 +29,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/createForm", async (req, res) => {
-  console.log(req);
   const {
     landlordName,
     tenantName,
