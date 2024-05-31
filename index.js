@@ -20,10 +20,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const pdfPath = path.join(__dirname, "public", "lease_doc.pdf");
-const outputPath = path.join(__dirname,  "public", "output.pdf");
-console.log(__filename, __dirname)
+const outputPath = path.join(__dirname, "public", "output.pdf");
+console.log(__filename, __dirname);
 
-app.use('/pdf', express.static(__dirname + '/public'))
+app.use("/pdf", express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   res.send("Easy Lease Says Hello World");
@@ -34,7 +34,7 @@ app.post("/createForm", async (req, res) => {
   const {
     landlordName,
     tenantName,
-    propertyInfo,
+    rentalUnit,
     contactInfo,
     leaseTermInfo,
     depositInfo,
@@ -88,27 +88,27 @@ app.post("/createForm", async (req, res) => {
 
       // Property Info
       const textp_unitNumber = form.getField("txtp_unitNumber");
-      textp_unitNumber.setText(propertyInfo.unit);
+      textp_unitNumber.setText(rentalUnit.unit);
 
       const txtp_streetNum = form.getField("txtp_streetnum");
-      txtp_streetNum.setText(propertyInfo.streetNumber);
+      txtp_streetNum.setText(rentalUnit.streetNumber);
 
       const txtp_street = form.getField("txtp_street");
-      txtp_street.setText(propertyInfo.streetName);
+      txtp_street.setText(rentalUnit.streetName);
 
       const txtp_city = form.getField("txtp_city");
-      txtp_city.setText(propertyInfo.city);
+      txtp_city.setText(rentalUnit.city);
 
       const txtp_zipcode = form.getField("txtp_zipcode");
-      txtp_zipcode.setText(propertyInfo.postalCode);
+      txtp_zipcode.setText(rentalUnit.postalCode);
 
       const txtParkingInfo = form.getField("txtParkingInfo");
-      txtParkingInfo.setText(propertyInfo.parkingSpace);
+      txtParkingInfo.setText(rentalUnit.parkingSpace);
 
       const inCondo_n = form.getCheckBox("inCondo_n");
       const inCondo_y = form.getCheckBox("inCondo_y");
 
-      propertyInfo.inCondo === "yes" ? inCondo_y.check() : inCondo_n.check();
+      rentalUnit.inCondo === "yes" ? inCondo_y.check() : inCondo_n.check();
 
       // Contact Info
       const txtSellUnit = form.getField("txtSellUnit");
